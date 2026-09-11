@@ -4,16 +4,6 @@
     card.addEventListener('click', function(){ card.classList.toggle('flipped'); });
   });
 
-  // gallery carousel
-  var galTrack = document.getElementById('galleryTrack');
-  function galScroll(dir){
-    var card = galTrack.querySelector('li');
-    var amount = card ? card.getBoundingClientRect().width + 20 : 240;
-    galTrack.scrollBy({ left: dir * amount, behavior: 'smooth' });
-  }
-  document.querySelector('.gallery-nav.prev').addEventListener('click', function(){ galScroll(-1); });
-  document.querySelector('.gallery-nav.next').addEventListener('click', function(){ galScroll(1); });
-
   // quote modal
   var overlay = document.getElementById('quoteOverlay');
   var quoteForm = document.getElementById('quoteForm');
