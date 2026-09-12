@@ -126,6 +126,12 @@
     background:color-mix(in srgb, var(--yellow) 18%, transparent); border:1px solid var(--yellow); color:var(--paper);
   }
   .modal-success.show{ display:block; }
+  .modal-error{
+    display:none; margin:1.2rem 0 0; padding:.9rem 1.1rem; border-radius:12px; font-size:.9rem;
+    background:color-mix(in srgb, var(--rose) 18%, transparent); border:1px solid var(--rose); color:var(--paper);
+  }
+  .modal-error.show{ display:block; }
+  .field-hidden{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
   .quote-form.hide{ display:none; }
   @media (max-width:600px){ .quote-form{ grid-template-columns:1fr; } }
 

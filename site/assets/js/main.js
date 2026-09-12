@@ -8,6 +8,7 @@
   var overlay = document.getElementById('quoteOverlay');
   var quoteForm = document.getElementById('quoteForm');
   var quoteSuccess = document.getElementById('quoteSuccess');
+  var quoteError = document.getElementById('quoteError');
   var lastFocused = null;
 
   function openQuote(){
@@ -15,6 +16,7 @@
     overlay.classList.add('open');
     quoteForm.classList.remove('hide');
     quoteSuccess.classList.remove('show');
+    quoteError.classList.remove('show');
     var firstField = document.getElementById('qName');
     if (firstField) firstField.focus();
   }
@@ -31,10 +33,29 @@
   document.addEventListener('keydown', function(e){
     if (e.key === 'Escape' && overlay.classList.contains('open')) closeQuote();
   });
+  function encodeForm(form){
+    return new URLSearchParams(new FormData(form)).toString();
+  }
+
   quoteForm.addEventListener('submit', function(e){
     e.preventDefault();
-    quoteForm.classList.add('hide');
-    quoteSuccess.classList.add('show');
-    quoteForm.reset();
+    var submitBtn = quoteForm.querySelector('button[type="submit"]');
+    if (submitBtn) submitBtn.disabled = true;
+    quoteError.classList.remove('show');
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encodeForm(quoteForm)
+    }).then(function(res){
+      if (!res.ok) throw new Error('Network response was not ok');
+      quoteForm.classList.add('hide');
+      quoteSuccess.classList.add('show');
+      quoteForm.reset();
+    }).catch(function(){
+      quoteError.classList.add('show');
+    }).finally(function(){
+      if (submitBtn) submitBtn.disabled = false;
+    });
   });
 })();

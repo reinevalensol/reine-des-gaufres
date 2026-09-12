@@ -227,7 +227,11 @@
         <button class="modal-close" id="quoteClose" type="button" aria-label="Fermer">&times;</button>
         <h3 id="quoteTitle" class="display">Demander un devis</h3>
         <p class="modal-lede">Mariage, anniversaire, entreprise, marché... décrivez votre événement, on s'occupe du reste.</p>
-        <form id="quoteForm" class="quote-form">
+        <form id="quoteForm" class="quote-form" name="quote" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="quote">
+          <p class="field-hidden" aria-hidden="true">
+            <label>Ne pas remplir si vous êtes humain : <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+          </p>
           <div class="field">
             <label for="qName">Nom &amp; prénom</label>
             <input id="qName" name="name" type="text" required autocomplete="name">
@@ -266,6 +270,7 @@
           <button type="submit" class="btn btn-primary field-full">Envoyer ma demande</button>
         </form>
         <p class="modal-success" id="quoteSuccess" role="status">Merci ! Votre demande a bien été enregistrée — nous revenons vers vous sous 48h.</p>
+        <p class="modal-error" id="quoteError" role="alert">Une erreur est survenue lors de l'envoi. Réessayez, ou contactez-nous directement au 06 22 67 40 68.</p>
       </div>
     </div>
   </div>
